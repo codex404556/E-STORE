@@ -18,7 +18,7 @@ const ProductsCharacteristics = async ({
 }: {
   product: Product | ProductWithFlexibleCategories | null;
 }) => {
-  const brand = await getBrand(product?.slug?.current as string);
+  const brandName = await getBrand(product?.slug?.current as string);
   return (
     <Accordion type="single" collapsible>
       <AccordionItem value="item-1">
@@ -28,9 +28,9 @@ const ProductsCharacteristics = async ({
         <AccordionContent className="">
           <p className="flex items-center justify-between">
             Brand:
-            {brand && (
+            {brandName && (
               <span className="text-sm font-bold text-lightColor">
-                {brand[0]?.brandName}
+                {brandName}
               </span>
             )}{" "}
           </p>
