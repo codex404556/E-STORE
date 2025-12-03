@@ -17,10 +17,10 @@ const LatestBlog = async () => {
             key={blog?._id}
             className="bg-shop_light_bg rounded-md shadow-md max-w-90 overflow-hidden hover:shadow-shop_light_yellow/40"
           >
-            {blog?.mainImage && (
-              <Link className="" href={`/blog/${blog?.slug.current}`}>
+            {blog?.mainImage && blog?.slug?.current && (
+              <Link className="" href={`/blog/${blog.slug.current}`}>
                 <Image
-                  src={urlFor(blog?.mainImage).url()}
+                  src={urlFor(blog.mainImage).url()}
                   alt="bolg-main-image"
                   width={500}
                   height={500}
