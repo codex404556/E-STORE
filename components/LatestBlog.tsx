@@ -39,10 +39,10 @@ const LatestBlog = async () => {
                     {blog?.publishedAt}
                   </p>
                 </div>
-                {blog?.author && (
+                {blog?.author && blog?.author?.image && (
                   <div className="flex flex-col items-center justify-between mt-2">
                     <Image
-                      src={urlFor(blog?.author?.image).url()}
+                      src={urlFor(blog.author.image).url()}
                       alt={blog.author.name || "Author"}
                       width={30}
                       height={30}
