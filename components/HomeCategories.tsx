@@ -8,9 +8,12 @@ import Link from "next/link";
 const HomeCategories = ({ categories }: { categories: Category[] }) => {
   return (
     <div className="bg-white border border-shop_light_yellow/20 my-10 md:my-20 p-5 lg:p-7 rounded-md">
-      <Title className="border-b pb-3">Popular Categories</Title>
+      <div className="flex items-center justify-between">
+        <Title className="border-b pb-3">Popular Categories</Title>
+        <Link href={{pathname: "/shop"}}>see all</Link>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-5 gap-5">
-        {categories?.map((item) => (
+        {categories?.slice(0,6).map((item) => (
           <Link
             href={`/category/${item?.slug?.current}`}
             key={item?._id}

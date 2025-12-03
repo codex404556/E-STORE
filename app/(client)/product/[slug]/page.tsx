@@ -4,7 +4,11 @@ import Container from "@/components/Container";
 import ImagesView from "@/components/ImagesView";
 import PriceView from "@/components/PriceView";
 import ProductsCharacteristics from "@/components/ProductsCharacteristics";
-import { getProductBySlug, getProductInfo, getProductReview } from "@/sanity/queries";
+import {
+  getProductBySlug,
+  getProductInfo,
+  getProductReview,
+} from "@/sanity/queries";
 import { StarIcon, Truck, CornerDownLeft } from "lucide-react";
 import React from "react";
 import { RxBorderSplit } from "react-icons/rx";
@@ -12,17 +16,19 @@ import { FaRegQuestionCircle } from "react-icons/fa";
 import { TbTruckDelivery } from "react-icons/tb";
 import { FiShare2 } from "react-icons/fi";
 import ProductTab from "@/components/ProductTab";
+interface Props {
+  params: Promise<{ slug: string }>;
+  showProduct?: true | false;
+}
 
 const SingleProductPage = async ({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) => {
+  params, showProduct
+}: Props) => {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
   const titleInfo = await getProductInfo(slug);
   const reviews = await getProductReview(slug);
-  
+
   const isStock = product?.stock;
   return (
     <Container className="flex flex-col md:flex-row gap-12 mt-20 px-20">
@@ -31,10 +37,7 @@ const SingleProductPage = async ({
           <ImagesView images={product?.images} isStock={isStock} />
         )}
 
-        <ProductTab
-          titleInfo={titleInfo}
-          reviews={reviews}
-        />
+        <ProductTab titleInfo={titleInfo} reviews={reviews} />
       </div>
       <div className="w-full min-w-1/2 flex flex-col gap-4">
         <h2 className="text-2xl font-semibold text-darkColor">
@@ -72,8 +75,8 @@ const SingleProductPage = async ({
           </p>
         </div>
         <div className="flex items-center justify-between gap-5">
-          <AddToCartButton product={product} showProduct={true} />
-          <AddToFavorites product={product} showProduct={true} />
+          <AddToCartButton showProduct={showProduct || true} product={product} />
+          <AddToFavorites product={product} showProduct={true} className="" />
         </div>
         <ProductsCharacteristics product={product} />
         <div className="flex flex-wrap items-center justify-between gap-2.5 border-b border-b-gray-200 py-5 mt-2 border-t border-t-gray-200">

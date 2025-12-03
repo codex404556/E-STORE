@@ -17,6 +17,6 @@ const PriceFormatter = ({ amount, className }: Props) => {
       {formattedPrice}
     </span>
   );
-};
+}; 
 
 export default PriceFormatter;

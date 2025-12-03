@@ -8,15 +8,17 @@ import AddToFavorites from "./AddToFavorites";
 import { Title } from "./ui/text";
 import PriceView from "./PriceView";
 import AddToCartButton from "./AddToCartButton";
+interface Props {
+  product: Product;
+  clasName: string;
+}
 
-const ProductsCard = ({ product }: { product: Product }) => {
+const ProductsCard = ({ product, clasName }: Props) => {
   return (
     <div className="text-sm border border-dark_blue/10 shadow-md rounded-md group bg-white overflow-hidden">
       <div className="relative group overflow-hidden">
         {product?.images && (
-          <Link
-            href={`/product/${product?.slug?.current}`}
-          >
+          <Link href={`/product/${product?.slug?.current}`}>
             <Image
               src={urlFor(product?.images[0]).url()}
               alt="product-images"
@@ -50,7 +52,12 @@ const ProductsCard = ({ product }: { product: Product }) => {
             New
           </p>
         )}
-        <AddToFavorites />
+
+        <AddToFavorites
+          showProduct={false}
+          product={product}
+          className={clasName}
+        />
       </div>
       <div className="p-3">
         <p className="uppercase line-clamp-1 text-xs text-lightColor">
@@ -78,22 +85,24 @@ const ProductsCard = ({ product }: { product: Product }) => {
               )
             )}
           </div>
-          <div className="flex items-center mt-2">
-            {(product?.stock as number) > 0 ? (
-              <p className="font-medium text-xs">
-                <span className="text-darkColor font-semibold bg-amber-400/40 rounded-full px-2">
-                  {product?.stock}
-                </span>{" "}
-                In Stock
-              </p>
-            ) : (
-              <p className="text-xs font-semibold bg-red-600/40 rounded-full px-2">
-                Unvailable
-              </p>
-            )}
-          </div>
           <div className="flex items-center justify-between">
-            <PriceView price={product?.price} discount={product?.discount} />
+            <div className="">
+              <div className="flex items-center mt-2">
+                {(product?.stock as number) > 0 ? (
+                  <p className="font-medium text-xs">
+                    <span className="text-darkColor font-semibold bg-amber-400/40 rounded-full px-2">
+                      {product?.stock}
+                    </span>{" "}
+                    In Stock
+                  </p>
+                ) : (
+                  <p className="text-xs font-semibold bg-red-600/40 rounded-full px-2">
+                    Unvailable
+                  </p>
+                )}
+              </div>
+              <PriceView price={product?.price} discount={product?.discount} />
+            </div>
             <AddToCartButton product={product} />
           </div>
         </div>

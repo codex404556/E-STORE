@@ -28,7 +28,7 @@ const BottomFooter = () => {
           {QuickLinks?.map((item) => (
             <li key={item?.title}>
               <Link
-                className="hover:text-lightOrange hoverEffect font-medium"
+                className="hover:text-lightOrange text-lightColor hoverEffect text-sm"
                 href={item?.href}
               >
                 {item?.title}
@@ -43,7 +43,7 @@ const BottomFooter = () => {
           {categoryLinks?.map((item) => (
             <li key={item?.title}>
               <Link
-                className="hover:text-lightOrange hoverEffect font-medium"
+                className="hover:text-lightOrange text-lightColor hoverEffect text-sm"
                 href={`/category/${item?.href}`}
               >
                 {item?.title}
@@ -53,9 +53,11 @@ const BottomFooter = () => {
         </ul>
       </div>
       <div className="space-y-4">
-        <SubText>Subscribe to our newslatter to receive update and exclusive offers</SubText>
+        <SubText>
+          Subscribe to our newslatter to receive update and exclusive offers
+        </SubText>
         <form className="space-y-3">
-          <Input placeholder="Enter Your Email" type="email"/>
+          <Input placeholder="Enter Your Email" type="email" />
           <Button className="w-full">Subscribe</Button>
         </form>
       </div>

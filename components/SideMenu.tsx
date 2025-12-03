@@ -1,16 +1,15 @@
-import React, { FC } from "react";
 import Logo from "./Logo";
 import { X } from "lucide-react";
 import { headerData } from "@/constants/data";
 import Link from "next/link";
 import SocialMedia from "./SocialMedia";
 import { useOutsideClick } from "@/hooks";
-interface SidebarProps {
+interface Props {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const SideMenu: FC<SidebarProps> = ({ isOpen, onClose }) => {
+const SideMenu = ({ isOpen, onClose }: Props) => {
   const sidebarRef = useOutsideClick<HTMLDivElement>(onClose);
   return (
     <div
