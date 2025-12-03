@@ -2,19 +2,24 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { Product } from "./sanity.types";
 
+// Type that allows categories to be either reference objects or strings (dereferenced)
+type ProductWithFlexibleCategories = Omit<Product, "categories"> & {
+  categories?: Product["categories"] | (string | null)[] | null;
+};
+
 export interface CartItem {
-  product: Product;
+  product: Product | ProductWithFlexibleCategories;
   quantity: number;
 }
 
 interface StoreState {
   items: CartItem[];
   getItemCount: (productId: string) => number;
-  addItem: (product: Product) => void;
+  addItem: (product: Product | ProductWithFlexibleCategories) => void;
   removeItem: (productId: string) => void;
   // list all of favorite product here
-  favoriteProduct: Product[];
-  addToFavorite: (product: Product) => Promise<void>;
+  favoriteProduct: (Product | ProductWithFlexibleCategories)[];
+  addToFavorite: (product: Product | ProductWithFlexibleCategories) => Promise<void>;
   getGroupedItems: () => CartItem[];
   getitemCount: (productId: string) => number;
   getSubTotalPrice: () => number;
@@ -62,7 +67,7 @@ const useStore = create<StoreState>()(
             return acc;
           }, [] as CartItem[]),
         })),
-      addToFavorite: (product: Product) => {
+      addToFavorite: (product: Product | ProductWithFlexibleCategories) => {
         return new Promise<void>((resolve) => {
           set((state) => {
             const isFavorite = state.favoriteProduct.some(

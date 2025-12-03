@@ -8,8 +8,14 @@ import AddToFavorites from "./AddToFavorites";
 import { Title } from "./ui/text";
 import PriceView from "./PriceView";
 import AddToCartButton from "./AddToCartButton";
+
+// Type that allows categories to be either reference objects or strings (dereferenced)
+type ProductWithFlexibleCategories = Omit<Product, "categories"> & {
+  categories?: Product["categories"] | (string | null)[] | null;
+};
+
 interface Props {
-  product: Product;
+  product: ProductWithFlexibleCategories;
   clasName: string;
 }
 
@@ -62,7 +68,9 @@ const ProductsCard = ({ product, clasName }: Props) => {
       <div className="p-3">
         <p className="uppercase line-clamp-1 text-xs text-lightColor">
           {product?.categories &&
-            product?.categories?.map((cat) => cat).join(", ")}
+            product?.categories
+              ?.filter((cat): cat is string => typeof cat === "string" && cat !== null)
+              .join(", ")}
         </p>
         <Title className="!text-sm line-clamp-1">{product?.name}</Title>
         <div className="">

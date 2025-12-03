@@ -9,8 +9,13 @@ import toast from "react-hot-toast";
 import PriceFormatter from "./PriceFormatter";
 import QuantityButton from "./QuantityButton";
 
+// Type that allows categories to be either reference objects or strings (dereferenced)
+type ProductWithFlexibleCategories = Omit<Product, "categories"> & {
+  categories?: Product["categories"] | (string | null)[] | null;
+};
+
 interface AddToCartButtonProps {
-  product: Product | null;
+  product: ProductWithFlexibleCategories | Product | null;
   showProduct?: true | false;
   className?: string;
 }

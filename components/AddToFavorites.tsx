@@ -6,9 +6,14 @@ import useStore from "@/store";
 import { Heart } from "lucide-react";
 import toast from "react-hot-toast";
 
+// Type that allows categories to be either reference objects or strings (dereferenced)
+type ProductWithFlexibleCategories = Omit<Product, "categories"> & {
+  categories?: Product["categories"] | (string | null)[] | null;
+};
+
 interface Props {
   showProduct: false | true;
-  product: Product | null;
+  product: ProductWithFlexibleCategories | Product | null;
   className: string;
 }
 
