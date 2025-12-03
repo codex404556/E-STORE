@@ -16,10 +16,10 @@ type ProductWithFlexibleCategories = Omit<Product, "categories"> & {
 
 interface Props {
   product: ProductWithFlexibleCategories;
-  clasName: string;
+  clasName?: string;
 }
 
-const ProductsCard = ({ product, clasName }: Props) => {
+const ProductsCard = ({ product, clasName = "" }: Props) => {
   return (
     <div className="text-sm border border-dark_blue/10 shadow-md rounded-md group bg-white overflow-hidden">
       <div className="relative group overflow-hidden">
