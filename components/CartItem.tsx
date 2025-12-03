@@ -9,8 +9,14 @@ import { Trash } from "lucide-react";
 import QuantityButton from "./QuantityButton";
 import PriceFormatter from "./PriceFormatter";
 import toast from "react-hot-toast";
+
+// Type that allows categories to be either reference objects or strings (dereferenced)
+type ProductWithFlexibleCategories = Omit<Product, "categories"> & {
+  categories?: Product["categories"] | (string | null)[] | null;
+};
+
 interface Props {
-  product: Product;
+  product: Product | ProductWithFlexibleCategories;
 }
 
 const CartItem = ({ product }: Props) => {

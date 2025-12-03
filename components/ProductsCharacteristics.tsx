@@ -8,10 +8,15 @@ import {
   AccordionTrigger,
 } from "./ui/accordion";
 
+// Type that allows categories to be either reference objects or strings (dereferenced)
+type ProductWithFlexibleCategories = Omit<Product, "categories"> & {
+  categories?: Product["categories"] | (string | null)[] | null;
+};
+
 const ProductsCharacteristics = async ({
   product,
 }: {
-  product: Product | null;
+  product: Product | ProductWithFlexibleCategories | null;
 }) => {
   const brand = await getBrand(product?.slug?.current as string);
   return (

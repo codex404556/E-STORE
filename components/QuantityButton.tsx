@@ -6,8 +6,13 @@ import { Product } from "@/sanity.types";
 import { cn } from "@/lib/utils";
 import toast from "react-hot-toast";
 
+// Type that allows categories to be either reference objects or strings (dereferenced)
+type ProductWithFlexibleCategories = Omit<Product, "categories"> & {
+  categories?: Product["categories"] | (string | null)[] | null;
+};
+
 interface Props {
-  product: Product;
+  product: Product | ProductWithFlexibleCategories;
   className?: string;
   showProduct: false | true;
 }
