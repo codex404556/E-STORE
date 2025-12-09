@@ -49,6 +49,7 @@ const getLatestBlog = async () => {
     return data ?? [];
   } catch (error) {
     console.log("Error featching Blogs:", error);
+    return [];
   }
 };
 

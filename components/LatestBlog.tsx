@@ -1,6 +1,7 @@
 import React from "react";
 import { Title } from "./ui/text";
 import { getLatestBlog } from "@/sanity/queries";
+import { LATEST_BLOG_QUERYResult } from "@/sanity.types";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import Link from "next/link";
@@ -12,7 +13,7 @@ const LatestBlog = async () => {
     <div className="mb-10 lg:mb-20">
       <Title>Latest Blog</Title>
       <div className="flex flex-wrap md:flex-nowrap mt-5 gap-4 py-3">
-        {blogs?.slice(0, 5).map((blog) => (
+        {blogs?.slice(0, 5).map((blog: LATEST_BLOG_QUERYResult[number]) => (
           <div
             key={blog?._id}
             className="bg-shop_light_bg rounded-md shadow-md max-w-90 overflow-hidden hover:shadow-shop_light_yellow/40"
