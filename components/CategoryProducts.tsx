@@ -16,13 +16,13 @@ interface Props {
 
 const CategoryProducts = ({ categories, slug }: Props) => {
   const [currentSlug, setCurrentSlug] = useState(slug);
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const handleCategoryChange = (newSlug: string) => {
     if (newSlug === currentSlug) return;
-    setCurrentSlug(slug);
+    setCurrentSlug(newSlug);
     router.push(`/category/${newSlug}`);
   };
 
@@ -39,9 +39,14 @@ const CategoryProducts = ({ categories, slug }: Props) => {
       setLoading(false);
     }
   };
+  
+  useEffect(() => {
+    setCurrentSlug(slug);
+  }, [slug]);
+
   useEffect(() => {
     featchProducts(currentSlug);
-  }, [router]);
+  }, [currentSlug]);
 
   return (
     <div className="py-5 flex flex-col md:flex-row items-start gap-5">
