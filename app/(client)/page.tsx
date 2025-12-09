@@ -7,6 +7,8 @@ import ShopByBrands from "@/components/ShopByBrands";
 import { getCategories } from "@/sanity/queries";
 import React from "react";
 
+export const dynamic = 'force-dynamic';
+
 const Home = async () => {
   const categories = await getCategories();
   console.log(categories);

@@ -4,6 +4,8 @@ import { Title } from "@/components/ui/text";
 import { getDealProducts } from "@/sanity/queries";
 import React from "react";
 
+export const dynamic = 'force-dynamic';
+
 const DealPage = async () => {
   const deals = await getDealProducts();
 
