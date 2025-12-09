@@ -2,6 +2,8 @@ import React from "react";
 import { getAllBrands, getCategories } from "@/sanity/queries";
 import Shop from "@/components/Shop";
 
+export const dynamic = 'force-dynamic';
+
 const ShopPage = async () => {
   const categories = await getCategories();
   const brands = await getAllBrands();
