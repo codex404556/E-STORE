@@ -62,9 +62,9 @@ const ShopByBrands = async () => {
         ))}
       </div>
       <div className="flex flex-wrap md:flex-nowrap items-cente justify-between gap-7 mt-10 md:gap-4 shadow-lg rounded-md py-5 px-5">
-        {orderData.map((brand) => (
+        {orderData.map((brand, index) => (
           <div
-            key={brand?._id}
+            key={brand.title}
             className="flex items-center justify-between gap-3 mb-5 mt-7 group"
           >
             <span className="text-lightColor hover:scale-110 group-hover:text-shop_dark_yellow hoverEffect">
