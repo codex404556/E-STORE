@@ -2,6 +2,7 @@ import Container from "@/components/Container";
 import ProductsCard from "@/components/ProductsCard";
 import { Title } from "@/components/ui/text";
 import { getDealProducts } from "@/sanity/queries";
+import { Product } from "@/sanity.types";
 import React from "react";
 
 export const dynamic = 'force-dynamic';
@@ -16,7 +17,7 @@ const DealPage = async () => {
           Hote Deals of the Week
         </Title>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5">
-          {deals?.map((deal) => (
+          {deals?.map((deal: Product) => (
             <ProductsCard key={deal?._id} product={deal} />
           ))}
         </div>

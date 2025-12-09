@@ -67,6 +67,7 @@ const getDealProducts = async () => {
     return data ?? [];
   } catch (error) {
     console.log("Error featching Deals:", error);
+    return [];
   }
 };
 
