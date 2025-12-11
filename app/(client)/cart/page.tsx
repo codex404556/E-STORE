@@ -14,6 +14,8 @@ import { ShoppingBag } from "lucide-react";
 import React from "react";
 import toast from "react-hot-toast";
 
+export const dynamic = 'force-dynamic';
+
 const CartPage = () => {
   const { isSignedIn } = useAuth();
   const { resetCart } = useStore();
