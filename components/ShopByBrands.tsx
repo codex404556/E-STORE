@@ -5,6 +5,7 @@ import { getAllBrands } from "@/sanity/queries";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import { GitCompareArrows, Headset, ShieldCheck, Truck } from "lucide-react";
+import { Brand } from "@/sanity.types";
 
 const orderData = [
   {
@@ -43,7 +44,7 @@ const ShopByBrands = async () => {
         </Link>
       </div>
       <div className="flex flex-wrap md:flex-nowrap justify-between  gap-1.5">
-        {brands?.slice(0, 8).map((brand) => (
+        {brands?.slice(0, 8).map((brand: Brand) => (
           <Link
             className="bg-white w-50 h-24 flex items-center justify-center rounded-md overflow-hidden hover:shadow-lg shadow-shop_light_yellow/20 hoverEffect group"
             key={brand?._id}
