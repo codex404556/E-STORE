@@ -5,6 +5,17 @@ function getSanityConfig() {
   const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET
   const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
 
+  // Debug logging (remove in production if needed)
+  if (typeof window === 'undefined') {
+    console.log('Sanity Config Check:', {
+      hasProjectId: !!projectId,
+      hasDataset: !!dataset,
+      projectId: projectId ? `${projectId.substring(0, 4)}...` : 'missing',
+      dataset: dataset || 'missing',
+      apiVersion
+    });
+  }
+
   if (!dataset || !projectId) {
     throw new Error(
       'Missing required Sanity environment variables. Please set NEXT_PUBLIC_SANITY_DATASET and NEXT_PUBLIC_SANITY_PROJECT_ID'
