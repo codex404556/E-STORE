@@ -8,17 +8,20 @@ import { Button } from "./ui/button";
 const OrderSummary = () => {
   const { getSubTotalPrice, getTotalPrice } = useStore();
   const [ loading, setLoading ] = useState(false);
-  //const handleCheckout = () => {
-   // setLoading(true);
-   // try {
-      //const metadata: Metadata = 
+  
+ 
+  //featch data using strip or whatever tools you need 
+  {/*const handleCheckout =  () => {
+  *setLoading(true);
+   try {
+    
 
-    //} catch (error) {
+    catch (error) {
 
-   // }finally {
-   //   setLoading(false)
-   // }
-  //} 
+   finally {
+  setLoading(false)
+    }
+  } */}
   return (
     <div className="hidden md:block border rounded-lg w-full bg-white p-8 pb-6 md:pb-8">
       <Title className="text-darkColor mb-7">Order Summary</Title>
@@ -48,7 +51,8 @@ const OrderSummary = () => {
         <Button
           size="lg"
           className="w-full rounded-md font-semibold tracking-wide hoverEffect"
-      
+          disabled={loading}
+          onClick={() =>setLoading(true)}
         >
           {loading ? "Processing..." : "Proceed to Checkout"}
         </Button>

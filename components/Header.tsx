@@ -39,8 +39,10 @@ const Header = () => {
         </div>
 
         <HeaderMenu isScrolled={isScrolled} />
-        <div className="flex w-auto md:1/3 items-center justify-end gap-5">
-          <SearchBar isScrolled={isScrolled} />
+        <div className="flex md:1/3 items-center justify-end gap-5">
+          <div className="flex justify-end w-20">
+            <SearchBar isScrolled={isScrolled} />
+          </div>
           <CartIcon isScrolled={isScrolled} />
           <FavoriteButton isScrolled={isScrolled} />
           <ClerkLoaded>

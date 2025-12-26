@@ -1,4 +1,4 @@
-import { defineQuery } from "next-sanity";
+import { defineQuery, groq } from "next-sanity";
 
 const BRANDS_QUERY = defineQuery(`*[_type=="brand"] | order(title asc)`);
 
@@ -39,7 +39,22 @@ const PRODUCT_BY_REVIEW = defineQuery(`
     }
   }
 `);
-
+const SEARCH_PRODUCTS = groq`
+*[_type == "product" && defined(slug.current) && (
+  name match $q ||
+  brand->title match $q ||
+  count((categories[]->title)[@ match $q]) > 0
+)]
+| order(_updatedAt desc)[0...20]{
+  _id,
+  name,
+  "slug": slug.current,
+  price,
+  "image": images[0].asset->url,
+  "brand": brand->title,
+  "categories": categories[]->title
+}
+`;
 
 export {
   BRANDS_QUERY,
@@ -50,4 +65,5 @@ export {
   BRAND_QUERY,
   PRODUCT_BY_INFO,
   PRODUCT_BY_REVIEW,
+  SEARCH_PRODUCTS,
 };

@@ -19,12 +19,16 @@ interface StoreState {
   removeItem: (productId: string) => void;
   // list all of favorite product here
   favoriteProduct: (Product | ProductWithFlexibleCategories)[];
-  addToFavorite: (product: Product | ProductWithFlexibleCategories) => Promise<void>;
+  addToFavorite: (
+    product: Product | ProductWithFlexibleCategories
+  ) => Promise<void>;
   getGroupedItems: () => CartItem[];
   getitemCount: (productId: string) => number;
   getSubTotalPrice: () => number;
   getTotalPrice: () => number;
   resetCart: () => void;
+  removeFromFavorite: (productId: string) => void;
+  resetFavorite: () => void;
 }
 
 const useStore = create<StoreState>()(
@@ -83,6 +87,16 @@ const useStore = create<StoreState>()(
           });
           resolve();
         });
+      },
+      removeFromFavorite: (productId: string) => {
+        set((state: StoreState) => ({
+          favoriteProduct: state.favoriteProduct.filter(
+            (item) => item._id !== productId
+          ),
+        }));
+      },
+      resetFavorite: () => {
+        set({ favoriteProduct: [] });
       },
       getitemCount: (productId: string) => {
         const item = get().items.find((item) => item.product._id === productId);

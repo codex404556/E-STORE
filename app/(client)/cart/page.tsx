@@ -47,13 +47,6 @@ const CartPage = () => {
                   {groupedItems.map(({ product }) => (
                     <CartItem key={product?._id} product={product} />
                   ))}
-                  <Button
-                    onClick={habdleResetCart}
-                    className="font-semibold m-5"
-                    variant="destructive"
-                  >
-                    Reset Cart
-                  </Button>
                 </div>
                 <div className="flex flex-col w-full md:max-w-1/3">
                   <OrderSummary />
@@ -61,6 +54,13 @@ const CartPage = () => {
                   <DeleveryInfo />
                 </div>
               </div>
+              <Button
+                onClick={habdleResetCart}
+                className="font-semibold m-5"
+                variant="destructive"
+              >
+                Reset Cart
+              </Button>
             </>
           ) : (
             <EmptyCart />

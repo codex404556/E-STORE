@@ -150,5 +150,10 @@ body {
 }
 
 .scrollbar-hide::-webkit-scrollbar {
-  display: none;
+  display: none; /* Chrome, Safari, Edge */
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE & old Edge */
+  scrollbar-width: none; /* Firefox */
 }

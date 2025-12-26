@@ -21,6 +21,7 @@ const Shop = ({ categories, brands }: Props) => {
   const searchParams = useSearchParams();
   const categoryParams = searchParams?.get("category");
   const brandParams = searchParams?.get("brand");
+  const searchTerm = (searchParams?.get("search") || "").trim();
   const [loading, setLoding] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(
@@ -45,6 +46,7 @@ const Shop = ({ categories, brands }: Props) => {
       *[_type == 'product' 
         && (!defined($selectedCategory) || references(*[_type == "category" && slug.current == $selectedCategory]._id))
         && (!defined($selectedBrand) || references(*[_type == "brand" && slug.current == $selectedBrand]._id))
+        && ($searchTerm == "" || name match $searchTerm)
         && price >= $minPrice && price <= $maxPrice
       ] 
       | order(name asc) {
@@ -53,7 +55,13 @@ const Shop = ({ categories, brands }: Props) => {
     `;
       const data = await client.fetch(
         query,
-        { selectedCategory, selectedBrand, minPrice, maxPrice },
+        {
+          selectedCategory,
+          selectedBrand,
+          minPrice,
+          maxPrice,
+          searchTerm: searchTerm ? `${searchTerm}*` : "",
+        },
         { next: { revalidate: 0 } }
       );
       setProducts(data);
@@ -65,7 +73,7 @@ const Shop = ({ categories, brands }: Props) => {
   };
   useEffect(() => {
     fetchProducts();
-  }, [selectedBrand, selectedCategory, selectedPrice]);
+  }, [selectedBrand, selectedCategory, selectedPrice, searchTerm]);
 
   return (
     <div className="border-t">

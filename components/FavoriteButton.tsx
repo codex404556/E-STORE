@@ -8,7 +8,7 @@ const FavoriteButton = ({ isScrolled }: { isScrolled: boolean }) => {
 
   return (
     <Link
-      href={"/cart"}
+      href={"/favorites"}
       className={`group relative hoverEffect ${isScrolled ? "scale-90" : "scale-120"}`}
     >
       <Heart className="w-5 h-5 hover:text-shop_dark_yellow hoverEffect" />
