@@ -142,7 +142,7 @@ const SearchBar = ({ isScrolled }: { isScrolled: boolean }) => {
               {/* Body */}
               <div className="mt-4 flex-1 overflow-y-auto overscroll-contain scrollbar-hide">
                 {debouncedSearchTerm.trim().length === 0 ? (
-                  <p className="text-2xl font-medium mt-10">Type to search</p>
+                  <p className="text-2xl font-medium space-y-10">Type to search</p>
                 ) : loading ? (
                   <div className="flex items-center gap-2">
                     <Loader2
